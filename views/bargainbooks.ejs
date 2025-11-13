@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Bertie's Books Shop - Bargains</title>
+		<link rel="stylesheet"  type="text/css" href="/main.css" />
+	</head>
+	<body>
+		<div class="panel">
+			<h1>Bertie's Books Shop</h1>
+			<h2>Here are books priced less than £20!</h2>
+
+			<ul class="book-list">
+				<% if (Array.isArray(availableBooks) && availableBooks.length) { %>
+					<% availableBooks.forEach(function(book) { %>
+						<% var title = book.name || book.title || 'Untitled'; %>
+						<% var rawPrice = book.price || 0; %>
+						<% var price = (isNaN(Number(rawPrice)) ? rawPrice : Number(rawPrice).toFixed(2)); %>
+						<li><%= title %>, £<%= price %></li>
+					<% }) %>
+				<% } else { %>
+					<li>No bargain books found.</li>
+				<% } %>
+			</ul>
+		</div>
+	</body>
+</html>

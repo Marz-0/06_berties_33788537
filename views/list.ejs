@@ -1,0 +1,28 @@
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Bertie's Books Shop</title>
+		<link rel="stylesheet"  type="text/css" href="/main.css" />
+	</head>
+	<body>
+		<div class="panel">
+			<h1>Bertie's Books Shop</h1>
+			<h2>Here are the books that we sell:</h2>
+
+			<ul class="book-list">
+				<% if (Array.isArray(availableBooks) && availableBooks.length) { %>
+					<% availableBooks.forEach(function(book) { %>
+						<% var title = book.title || book.book_title || book.name || book.book || 'Untitled'; %>
+						<% var rawPrice = book.price || book.cost || book.value || book.price_pounds || book.amount || 0; %>
+						<% var price = (isNaN(Number(rawPrice)) ? rawPrice : Number(rawPrice).toFixed(2)); %>
+						<li><%= title %>, £<%= price %></li>
+					<% }) %>
+				<% } else { %>
+					<li>No books found.</li>
+				<% } %>
+			</ul>
+		</div>
+	</body>
+</html>
