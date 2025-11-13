@@ -60,7 +60,7 @@ router.post('/bookadded', function (req, res, next) {
                     next(err)
                 }
                 else
-                    res.render("Bargainbooks.ejs", {availableBooks: result})
+                    res.render("bargainbooks.ejs", {availableBooks: result})
             })
     });
 
