@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Bertie's Books - Users</title>
+        <link rel="stylesheet"  type="text/css" href="/main.css" />
+    </head>
+    <body>
+        <div class="panel">
+            <h1>Bertie's Books Shop</h1>
+            <h2>Registered users</h2>
+
+            <ul class="book-list">
+                <% if (Array.isArray(users) && users.length) { %>
+                    <% users.forEach(function(user) { %>
+                        <li><%= user.first %> <%= user.last %> &ndash; <%= user.email %></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No users found.</li>
+                <% } %>
+            </ul>
+        </div>
+    </body>
+</html>

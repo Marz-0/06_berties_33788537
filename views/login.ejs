@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Login - <%= shopData.shopName %></title>
+		<link rel="stylesheet" type="text/css" href="/main.css" />
+	</head>
+	<body>
+		<div class="panel">
+			<h1>Login to <%= shopData.shopName %></h1>
+
+			<% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+				<div class="error"><%= errorMessage %></div>
+			<% } %>
+
+			<form method="POST" action="/users/login">
+				<p>
+					<label for="identifier">Username:</label>
+					<input id="identifier" name="identifier" type="text" required />
+				</p>
+				<p>
+					<label for="password">Password:</label>
+					<input id="password" name="password" type="password" required />
+				</p>
+				<p>
+					<button type="submit">Login</button>
+				</p>
+			</form>
+
+			<p>Don't have an account? <a href="/users/register">Register here</a>.</p>
+		</div>
+	</body>
+</html>
