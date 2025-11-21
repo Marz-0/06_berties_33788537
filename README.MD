@@ -89,12 +89,6 @@ Failure reasons currently include: missing credentials, user not found, no passw
 
 ------------------------------------------------------------------------
 
-## Notes about column names and conventions
-
-- The codebase currently uses a mix of password column names in different places (`password`, `hashedPassword`). The `create_db.sql` in this repo creates a `users.password` column; registration code inserts a hashed password into a column named `hashedPassword` in some places — you may want to standardize this to `password` (or update the SQL) for consistency.
-- The audit table is named `login_audit` in the repository (not `login_attempts`) — the README and any external documentation should reference `login_audit`.
-
-------------------------------------------------------------------------
 
 ## Testing the app
 
