@@ -110,13 +110,13 @@ router.get('/audit', redirectLogin, function (req, res, next) {
   })
 })
 
-// Logout route for users (accessible at /users/logout)
+// Logout route for users 
     router.get('/logout', redirectLogin, (req,res) => {
         req.session.destroy(err => {
         if (err) {
           return res.redirect('./')
         }
-        res.send('you are now logged out. <a href='+'./'+'>Home</a>');
+        res.send('you are now logged out. <a href='+'/'+'>Home</a>');
         })
     })
 
