@@ -57,7 +57,7 @@ function handleLogin(req, res, next) {
           req.session.username = user.username
           req.session.name = name
         } catch (e) {}
-        return logAttempt(identifier, true, 'success', () => res.redirect('/users/loggedin'))
+        return logAttempt(identifier, true, 'success', () => res.redirect('../users/loggedin'))
       } else {
         return logAttempt(identifier, false, 'incorrect password', () => res.send('Login failed: incorrect password'))
       }
