@@ -77,6 +77,8 @@ The application will be available at `http://localhost:8000` unless you change t
 - User registration with bcrypt password hashing
 - Login system with authentication
 - View all registered users (`/users/list`)
+
+### Access control
 - log in and log out system
 - stop users from accessing certain parts of the website, e.g user lists and adding a book without having an account. Users need to log in first to access these links/pages.
 
@@ -111,7 +113,7 @@ In my code, I have added validation to:
     - If the price has any input (not empty)
 
 
-## sanitation
+## Sanitation
 
 sanitation has been added in text boxes to prevent users from any Cross-Site Scripting (XSS) attacks. 
 
