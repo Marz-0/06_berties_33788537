@@ -54,7 +54,7 @@ router.get('/addbook', redirectLogin, function (req, res, next) {
     res.render('addbook.ejs')
 });
 
-router.post('../bookadded', redirectLogin, 
+router.post('/bookadded', redirectLogin, 
 
             [check('name').notEmpty(),
             check('price').isFloat({ gt: 0 })],
