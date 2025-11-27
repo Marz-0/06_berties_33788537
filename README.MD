@@ -90,7 +90,7 @@ Failure reasons currently include: missing credentials, user not found, no passw
 
 
 
-## validation
+## Validation
 
 Validation has been added in text boxes where uses must enter text or information to add to the database.
 In my code, I have added validation to:
@@ -108,6 +108,28 @@ In my code, I have added validation to:
 - The add books page checks for:
     - If the book name is has input (not empty)
     - If the price has any input (not empty)
+
+
+## sanitation
+
+sanitation has been added in text boxes to prevent users from any Cross-Site Scripting (XSS) attacks. 
+
+We use the express-sanitizer module to sanitise our fields. This is done by wraping any request body with req.sanitize. This prevents any XSS attacks in our website. 
+
+The following pages have been sanitized:
+
+- The register page:
+    - First name
+    - Fast name
+    - Email
+    - Hashed password 
+
+As these are output onto the page once users have registered
+
+- The add books page: 
+    - Book name
+    - Price (Although this is not needed, as it forces users to only input a number)
+
 
 
 ------------------------------------------------------------------------

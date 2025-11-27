@@ -103,11 +103,11 @@ router.post('/registered',
     if (err) return next(err)
 
     const sqlquery = 'INSERT INTO users (username, first, last, email, hashedPassword) VALUES (?,?,?,?,?)'
-    const newrecord = [req.body.username, req.body.first, req.body.last, req.body.email, hashedPassword]
+    const newrecord = [req.body.username, req.sanitize(req.body.first), req.sanitize(req.body.last), req.sanitize(req.body.email), req.sanitize(hashedPassword)]
     db.query(sqlquery, newrecord, (err, result) => {
       if (err) return next(err)
-      let resultMsg = 'Hello ' + req.body.first + ' ' + req.body.last + ' you are now registered! We will send an email to you at ' + req.body.email
-      resultMsg += ' Your password is: ' + req.body.password + ' and your hashed password is: ' + hashedPassword
+      let resultMsg = 'Hello ' + req.sanitize(req.body.first) + ' ' + req.sanitize(req.body.last) + ' you are now registered! We will send an email to you at ' + req.sanitize(req.body.email)
+      resultMsg += ' Your password is: ' + req.sanitize(req.body.password) + ' and your hashed password is: ' + req.sanitize(hashedPassword)
       res.send(resultMsg)
     })
   })}

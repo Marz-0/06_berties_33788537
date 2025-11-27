@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 const main = require('./main')
 const { check, validationResult } = require('express-validator');
-
+const expressSanitizer = require('express-sanitizer');
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -66,13 +66,13 @@ router.post('/bookadded', redirectLogin,
     // saving data in database
     let sqlquery = "INSERT INTO books (name, price) VALUES (?,?)"
     // execute sql query
-    let newrecord = [req.body.name, req.body.price]
+    let newrecord = [req.sanitize(req.body.name), req.sanitize(req.body.price)]
     db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
             next(err)
         }
         else
-            res.send(' This book is added to database, name: '+ req.body.name + ' price '+ req.body.price)
+            res.send(' This book is added to database, name: '+ req.sanitize(req.body.name) + ' price '+ req.sanitize(req.body.price))
     })
 }}); 
 
