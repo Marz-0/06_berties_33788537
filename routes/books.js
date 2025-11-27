@@ -2,6 +2,8 @@
 const express = require("express")
 const router = express.Router()
 const main = require('./main')
+const { check, validationResult } = require('express-validator');
+
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -15,7 +17,14 @@ router.get('/search',function(req, res, next){
     res.render("search.ejs")
 });
 
-router.get('/search_result', function (req, res, next) {
+router.get('/search_result',     
+            [check('search_text').notEmpty()],
+    function (req, res, next) {
+            const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('./register')
+    }
+    else { 
     const q = (req.query.search_text || '').trim();
     if (!q) {
         return res.redirect('/books/search');
@@ -28,7 +37,7 @@ router.get('/search_result', function (req, res, next) {
         // render the existing view file
         res.render('search_result.ejs', { books: result, searchTerm: q });
     });
-});
+}});
 
 router.get('/list', function(req, res, next) {
     let sqlquery = "SELECT * FROM books"; // query database to get all the books
@@ -45,7 +54,15 @@ router.get('/addbook', redirectLogin, function (req, res, next) {
     res.render('addbook.ejs')
 });
 
-router.post('../bookadded', redirectLogin, function (req, res, next) {
+router.post('../bookadded', redirectLogin, 
+
+            [check('name').notEmpty(),
+            check('price').isFloat({ gt: 0 })],
+    function (req, res, next) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.render("addbook.ejs");
+        } else {
     // saving data in database
     let sqlquery = "INSERT INTO books (name, price) VALUES (?,?)"
     // execute sql query
@@ -57,7 +74,7 @@ router.post('../bookadded', redirectLogin, function (req, res, next) {
         else
             res.send(' This book is added to database, name: '+ req.body.name + ' price '+ req.body.price)
     })
-}) 
+}}); 
 
 
 

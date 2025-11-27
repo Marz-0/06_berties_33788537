@@ -87,6 +87,29 @@ Login attempts (successful and failed) are recorded to the `login_audit` table. 
 
 Failure reasons currently include: missing credentials, user not found, no password stored, incorrect password.
 
+
+
+
+## validation
+
+Validation has been added in text boxes where uses must enter text or information to add to the database.
+In my code, I have added validation to:
+
+- The register page checks for:
+    - If the email is valid
+    - if the username is at least 5 charcters long, with a max of 20 characters
+    - if the password is at least 8 characters long
+    - if the first name has any input in (not empty)
+    - if the last name has any input in (not empty)
+
+- The search page check for: 
+    - If the input is has input in (not empty)
+
+- The add books page checks for:
+    - If the book name is has input (not empty)
+    - If the price has any input (not empty)
+
+
 ------------------------------------------------------------------------
 
 

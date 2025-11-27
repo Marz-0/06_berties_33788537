@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const main = require('./main')
+const { check, validationResult } = require('express-validator');
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -81,7 +82,21 @@ router.get('/loggedin', redirectLogin, function (req, res, next) {
   res.send('Login successful. Welcome ' + name + '! <a href="/">Home</a>')
 })
 
-router.post('/registered', function (req, res, next) {
+router.post('/registered', 
+                 [check('email').isEmail(), 
+                  check('username').isLength({ min: 5, max: 20}),
+                  check('password').isLength({ min: 8 }),
+                  check('first').notEmpty(),
+                  check('last').notEmpty()
+                ], 
+                 function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('./register')
+    }
+    else { 
+
+          
   const saltRounds = 10
   const plainPassword = req.body.password || ''
   bcrypt.hash(plainPassword, saltRounds, function (err, hashedPassword) {
@@ -95,7 +110,7 @@ router.post('/registered', function (req, res, next) {
       resultMsg += ' Your password is: ' + req.body.password + ' and your hashed password is: ' + hashedPassword
       res.send(resultMsg)
     })
-  })
+  })}
 })
 
 
